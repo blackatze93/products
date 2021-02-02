@@ -14,3 +14,14 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+###> IDEs ###
+.c9/*
+.buildpath
+.project
+.settings
+nbproject
+.idea
+.tm_properties
+###< IDEs ###
+
