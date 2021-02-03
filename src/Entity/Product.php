@@ -4,9 +4,13 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
+ * @UniqueEntity("name")
+ * @UniqueEntity("code")
  */
 class Product
 {
@@ -19,42 +23,55 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="4", max="10")
+     * @Assert\NotBlank
+     * @Assert\Type(type={"alpha", "digit"})
      */
     private $code;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="4")
+     * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $brand;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank
      */
     private $category;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\Positive
+     * @Assert\NotBlank
+     * @Assert\Type(type="numeric")
      */
     private $price;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank
      */
     private $updatedAt;
 
